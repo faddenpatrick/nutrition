@@ -28,6 +28,26 @@
         <button onclick="setGoals()">Set Goals</button>
     </div>
 
+<script>
+// Retrieve the visibility state from local storage
+const isProfileVisible = localStorage.getItem('isProfileVisible');
+const isGoalsVisible = localStorage.getItem('isGoalsVisible');
+
+// Set initial visibility based on stored values or default to visible
+document.getElementById('profile-section').style.display = isProfileVisible === 'false' ? 'none' : 'block';
+document.getElementById('goals-section').style.display = isGoalsVisible === 'false' ? 'none' : 'block';
+
+function setProfileVisibility(visible) {
+    // Store the visibility state in local storage
+    localStorage.setItem('isProfileVisible', visible);
+}
+
+function setGoalsVisibility(visible) {
+    // Store the visibility state in local storage
+    localStorage.setItem('isGoalsVisible', visible);
+}
+</script>
+
     <div class="food-entry">
         <label for="food-name">Food Name:</label>
         <input type="text" id="food-name">
