@@ -13,10 +13,6 @@ window.onload = function() {
     document.getElementById('goal-display-carbs').textContent = goalCarbs;
     document.getElementById('goal-display-fats').textContent = goalFats;
 
-    const foodLog = JSON.parse(localStorage.getItem('foodLog')) || [];
-    foodLog.forEach(addToFoodLog);
-    updateTotals(foodLog);
-
     // Retrieve visibility states from localStorage
     const isProfileVisible = localStorage.getItem('isProfileVisible') === 'true';
     const isGoalsVisible = localStorage.getItem('isGoalsVisible') === 'true';
@@ -27,10 +23,6 @@ window.onload = function() {
 
     profileSection.style.display = isProfileVisible ? 'block' : 'none';
     goalsSection.style.display = isGoalsVisible ? 'block' : 'none';
-};
-
-// Rest of your code...
-
 
 
 function setProfileName() {
