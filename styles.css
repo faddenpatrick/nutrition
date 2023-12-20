@@ -1,0 +1,59 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+/* Reset default margin and padding */
+body, h1, h2, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Body background and font colors */
+body {
+    background-color: #1c1c1c; /* Dark grey or black */
+    color: #ffffff; /* White text */
+    font-family: Arial, sans-serif;
+}
+
+/* Header styles */
+h1 {
+    color: #ff0000; /* Red header */
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Make input fields full width on smaller screens */
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding doesn't add to width */
+}
+
+/* Adjust padding and font size for smaller screens */
+body {
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Adjust header size for smaller screens */
+h1 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+/* Adjust button size for smaller screens */
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+}
+
+/* Adjust margins and padding for mobile */
+.profile-summary,
+.food-list {
+    margin-top: 10px;
+    padding: 15px;
+}
