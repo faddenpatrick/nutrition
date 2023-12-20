@@ -1,31 +1,35 @@
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
 /* Reset default margin and padding */
 body, h1, h2, p, ul {
     margin: 0;
     padding: 0;
 }
 
+/* Viewport meta tag */
+/* Ensure it's added in the HTML file */
+
 /* Body background and font colors */
 body {
     background-color: #1c1c1c; /* Dark grey or black */
     color: #ffffff; /* White text */
     font-family: Arial, sans-serif;
+    padding: 5px; /* Decrease overall padding */
+    font-size: 14px; /* Reduce font size */
 }
 
 /* Header styles */
 h1 {
     color: #ff0000; /* Red header */
     text-align: center;
-    margin: 20px 0;
+    font-size: 20px; /* Adjust header size */
+    margin: 10px 0; /* Reduce header margin */
 }
 
 /* Make input fields full width on smaller screens */
 input[type="text"],
 input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
+    width: calc(100% - 20px); /* Adjust input width for smaller screens */
+    padding: 8px;
+    margin-bottom: 8px;
     background-color: #333333;
     color: #ffffff;
     border: none;
@@ -33,27 +37,29 @@ input[type="number"] {
     box-sizing: border-box; /* Ensure padding doesn't add to width */
 }
 
-/* Adjust padding and font size for smaller screens */
-body {
-    padding: 10px;
-    font-size: 16px;
-}
-
-/* Adjust header size for smaller screens */
-h1 {
-    font-size: 24px;
-    margin: 10px 0;
-}
-
 /* Adjust button size for smaller screens */
 button {
-    padding: 10px 15px;
-    font-size: 16px;
+    padding: 8px 12px; /* Slightly smaller button */
+    font-size: 14px; /* Adjust button font size */
+    background-color: #ff0000; /* Red button */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 /* Adjust margins and padding for mobile */
 .profile-summary,
 .food-list {
     margin-top: 10px;
-    padding: 15px;
+    padding: 15px; /* Adjust padding for elements */
+}
+
+/* Media query for adjusting styles on smaller screens */
+@media screen and (max-width: 600px) {
+    body {
+        font-size: 12px; /* Further reduce font size for smaller screens */
+    }
+
+    /* Add more adjustments for smaller screens as needed */
 }
