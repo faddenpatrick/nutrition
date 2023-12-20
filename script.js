@@ -175,3 +175,26 @@ function changeGoals() {
     }
 }
 
+// Retrieve the visibility state from local storage
+const isProfileVisible = localStorage.getItem('isProfileVisible');
+const isGoalsVisible = localStorage.getItem('isGoalsVisible');
+
+// Function to set profile visibility
+function setProfileVisibility(visible) {
+    localStorage.setItem('isProfileVisible', visible);
+}
+
+// Function to set goals visibility
+function setGoalsVisibility(visible) {
+    localStorage.setItem('isGoalsVisible', visible);
+}
+
+// Check the visibility state and set styles when the DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const profileSection = document.getElementById('profile-section');
+    const goalsSection = document.getElementById('goals-section');
+
+    // Set initial visibility based on stored values or default to visible
+    profileSection.style.display = isProfileVisible === 'false' ? 'none' : 'block';
+    goalsSection.style.display = isGoalsVisible === 'false' ? 'none' : 'block';
+});
