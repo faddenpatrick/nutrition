@@ -4,62 +4,54 @@ body, h1, h2, p, ul {
     padding: 0;
 }
 
-/* Viewport meta tag */
-/* Ensure it's added in the HTML file */
-
 /* Body background and font colors */
 body {
     background-color: #1c1c1c; /* Dark grey or black */
     color: #ffffff; /* White text */
     font-family: Arial, sans-serif;
-    padding: 5px; /* Decrease overall padding */
-    font-size: 14px; /* Reduce font size */
+    padding: 20px;
 }
 
 /* Header styles */
-h1 {
-    color: #ff0000; /* Red header */
+header {
     text-align: center;
-    font-size: 20px; /* Adjust header size */
-    margin: 10px 0; /* Reduce header margin */
+    margin-bottom: 20px;
 }
 
-/* Make input fields full width on smaller screens */
+/* Section styles */
+section {
+    margin-bottom: 20px;
+}
+
+/* Input and button styles */
 input[type="text"],
-input[type="number"] {
-    width: calc(100% - 20px); /* Adjust input width for smaller screens */
-    padding: 8px;
-    margin-bottom: 8px;
-    background-color: #333333;
-    color: #ffffff;
+input[type="number"],
+button {
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
     border: none;
     border-radius: 5px;
     box-sizing: border-box; /* Ensure padding doesn't add to width */
 }
 
-/* Adjust button size for smaller screens */
 button {
-    padding: 8px 12px; /* Slightly smaller button */
-    font-size: 14px; /* Adjust button font size */
     background-color: #ff0000; /* Red button */
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
+    color: #ffffff; /* White text */
     cursor: pointer;
 }
 
-/* Adjust margins and padding for mobile */
-.profile-summary,
-.food-list {
-    margin-top: 10px;
-    padding: 15px; /* Adjust padding for elements */
+button:hover {
+    opacity: 0.8;
 }
 
-/* Media query for adjusting styles on smaller screens */
-@media screen and (max-width: 600px) {
-    body {
-        font-size: 12px; /* Further reduce font size for smaller screens */
-    }
+/* Food log styles */
+#food-log {
+    list-style: none;
+}
 
-    /* Add more adjustments for smaller screens as needed */
+/* Total display styles */
+#totals {
+    font-weight: bold;
 }
