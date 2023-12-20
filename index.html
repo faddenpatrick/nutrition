@@ -1,43 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Nutrition Tracker</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Food Tracker</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link your CSS file if you have one -->
 </head>
 <body>
-    <header>
-        <h1>My Nutrition Tracker</h1>
-    </header>
+    <h1>Food Tracker</h1>
 
-    <section id="profile-section">
-        <h2>Profile</h2>
-        <input type="text" id="profile-name" placeholder="Enter Your Name">
-        <button onclick="setProfileName()">Set Name</button>
-    </section>
+    <div class="profile" id="profile-section">
+        <label for="profile-name">Profile Name:</label>
+        <input type="text" id="profile-name">
+        <button onclick="setProfileName()">Set Profile</button>
+    </div>
 
-    <section id="goals-section">
-        <h2>Goals</h2>
-        <input type="number" id="goal-calories" placeholder="Calories">
-        <input type="number" id="goal-protein" placeholder="Protein">
-        <input type="number" id="goal-carbs" placeholder="Carbs">
-        <input type="number" id="goal-fats" placeholder="Fats">
+    <div class="goals" id="goals-section">
+        <h2>Nutrition Goals</h2>
+        <label for="goal-calories">Calories Goal:</label>
+        <input type="number" id="goal-calories">
+        <label for="goal-protein">Protein Goal (g):</label>
+        <input type="number" id="goal-protein">
+        <label for="goal-carbs">Carbs Goal (g):</label>
+        <input type="number" id="goal-carbs">
+        <label for="goal-fats">Fats Goal (g):</label>
+        <input type="number" id="goal-fats">
         <button onclick="setGoals()">Set Goals</button>
-    </section>
+    </div>
 
-    <section id="food-log-section">
-        <h2>Food Log</h2>
-        <ul id="food-log"></ul>
-        <div id="totals">
-            <p>Total Calories: <span id="total-calories">0</span></p>
-            <p>Total Protein: <span id="total-protein">0</span></p>
-            <p>Total Carbs: <span id="total-carbs">0</span></p>
-            <p>Total Fats: <span id="total-fats">0</span></p>
-        </div>
-        <button onclick="clearLog()">Clear Log</button>
-    </section>
+    <div class="food-entry">
+        <label for="food-name">Food Name:</label>
+        <input type="text" id="food-name">
+        <label for="calories">Calories:</label>
+        <input type="number" id="calories">
+        <label for="protein">Protein (g):</label>
+        <input type="number" id="protein">
+        <label for="carbs">Carbs (g):</label>
+        <input type="number" id="carbs">
+        <label for="fats">Fats (g):</label>
+        <input type="number" id="fats">
+        <button onclick="addFood()">Add Food</button>
+    </div>
 
-    <script src="script.js"></script>
+    <div class="profile-summary">
+        <h2>Profile Summary</h2>
+        <p>Profile Name: <span id="profile-display"></span></p>
+        <p>Total Calories: <span id="total-calories">0</span> / <span id="goal-display-calories">0</span></p>
+        <p>Total Protein: <span id="total-protein">0</span>g / <span id="goal-display-protein">0</span>g</p>
+        <p>Total Carbs: <span id="total-carbs">0</span>g / <span id="goal-display-carbs">0</span>g</p>
+        <p>Total Fats: <span id="total-fats">0</span>g / <span id="goal-display-fats">0</span>g</p>
+        <button onclick="changeGoals()">Change Goals</button>
+    </div>
+
+    <!-- Food List or Log -->
+    <div class="food-list" id="food-log">
+        <!-- Your food log will be dynamically populated here -->
+    </div>
+
+<button onclick="clearLog()">Clear Log</button> <!-- Clear Log button -->
+
+    <script src="script.js"></script> <!-- Reference your JavaScript file -->
 </body>
 </html>
