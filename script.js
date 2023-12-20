@@ -18,6 +18,22 @@ window.onload = function() {
     updateTotals(foodLog);
 }
 
+window.onload = function() {
+    // Retrieve visibility states from localStorage
+    const isProfileVisible = localStorage.getItem('isProfileVisible') === 'true';
+    const isGoalsVisible = localStorage.getItem('isGoalsVisible') === 'true';
+
+    // Set initial display based on stored values
+    const profileSection = document.getElementById('profile-section');
+    const goalsSection = document.getElementById('goals-section');
+
+    profileSection.style.display = isProfileVisible ? 'block' : 'none';
+    goalsSection.style.display = isGoalsVisible ? 'block' : 'none';
+
+    // Rest of your existing code...
+}
+
+
 function setProfileName() {
     const nameInput = document.getElementById('profile-name').value;
     if (!nameInput) {
@@ -175,26 +191,3 @@ function changeGoals() {
     }
 }
 
-// Retrieve the visibility state from local storage
-const isProfileVisible = localStorage.getItem('isProfileVisible');
-const isGoalsVisible = localStorage.getItem('isGoalsVisible');
-
-// Function to set profile visibility
-function setProfileVisibility(visible) {
-    localStorage.setItem('isProfileVisible', visible);
-}
-
-// Function to set goals visibility
-function setGoalsVisibility(visible) {
-    localStorage.setItem('isGoalsVisible', visible);
-}
-
-// Check the visibility state and set styles when the DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    const profileSection = document.getElementById('profile-section');
-    const goalsSection = document.getElementById('goals-section');
-
-    // Set initial visibility based on stored values or default to visible
-    profileSection.style.display = isProfileVisible === 'false' ? 'none' : 'block';
-    goalsSection.style.display = isGoalsVisible === 'false' ? 'none' : 'block';
-});
