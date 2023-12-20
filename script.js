@@ -16,9 +16,7 @@ window.onload = function() {
     const foodLog = JSON.parse(localStorage.getItem('foodLog')) || [];
     foodLog.forEach(addToFoodLog);
     updateTotals(foodLog);
-}
 
-window.onload = function() {
     // Retrieve visibility states from localStorage
     const isProfileVisible = localStorage.getItem('isProfileVisible') === 'true';
     const isGoalsVisible = localStorage.getItem('isGoalsVisible') === 'true';
@@ -29,9 +27,10 @@ window.onload = function() {
 
     profileSection.style.display = isProfileVisible ? 'block' : 'none';
     goalsSection.style.display = isGoalsVisible ? 'block' : 'none';
+};
 
-    // Rest of your existing code...
-}
+// Rest of your code...
+
 
 
 function setProfileName() {
