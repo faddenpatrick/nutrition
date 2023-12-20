@@ -1,177 +1,65 @@
-let profileName = localStorage.getItem('profileName') || '';
-let goalCalories = parseFloat(localStorage.getItem('goalCalories')) || 0;
-let goalProtein = parseFloat(localStorage.getItem('goalProtein')) || 0;
-let goalCarbs = parseFloat(localStorage.getItem('goalCarbs')) || 0;
-let goalFats = parseFloat(localStorage.getItem('goalFats')) || 0;
+let entries = [];
+let goalCalories = 2000; // Default goal calories
 
-window.onload = function() {
-    if (profileName) {
-        document.getElementById('profile-display').textContent = profileName;
+// Load data from local storage if available
+window.onload = function () {
+    if (localStorage.getItem('entries')) {
+        entries = JSON.parse(localStorage.getItem('entries'));
+        updateEntries();
     }
-    document.getElementById('goal-display-calories').textContent = goalCalories;
-    document.getElementById('goal-display-protein').textContent = goalProtein;
-    document.getElementById('goal-display-carbs').textContent = goalCarbs;
-    document.getElementById('goal-display-fats').textContent = goalFats;
-
-    const foodLog = JSON.parse(localStorage.getItem('foodLog')) || [];
-    foodLog.forEach(addToFoodLog);
-    updateTotals(foodLog);
-}
-
-function setProfileName() {
-    const nameInput = document.getElementById('profile-name').value;
-    if (!nameInput) {
-        alert('Please enter a profile name.');
-        return;
+    if (localStorage.getItem('goalCalories')) {
+        goalCalories = parseInt(localStorage.getItem('goalCalories'));
+        document.getElementById('goal-calories').value = goalCalories;
     }
-    profileName = nameInput;
-    document.getElementById('profile-display').textContent = profileName;
-    localStorage.setItem('profileName', profileName);
-}
+};
 
-function setGoals() {
-    goalCalories = parseFloat(document.getElementById('goal-calories').value) || 0;
-    goalProtein = parseFloat(document.getElementById('goal-protein').value) || 0;
-    goalCarbs = parseFloat(document.getElementById('goal-carbs').value) || 0;
-    goalFats = parseFloat(document.getElementById('goal-fats').value) || 0;
-
-    document.getElementById('goal-display-calories').textContent = goalCalories;
-    document.getElementById('goal-display-protein').textContent = goalProtein;
-    document.getElementById('goal-display-carbs').textContent = goalCarbs;
-    document.getElementById('goal-display-fats').textContent = goalFats;
-
-    localStorage.setItem('goalCalories', goalCalories);
-    localStorage.setItem('goalProtein', goalProtein);
-    localStorage.setItem('goalCarbs', goalCarbs);
-    localStorage.setItem('goalFats', goalFats);
-}
-
-function clearLog() {
-    localStorage.removeItem('foodLog');
-    localStorage.removeItem('totalCalories');
-    localStorage.removeItem('totalProtein');
-    localStorage.removeItem('totalCarbs');
-    localStorage.removeItem('totalFats');
-
-    document.getElementById('food-log').innerHTML = '';
-    document.getElementById('total-calories').textContent = '0';
-    document.getElementById('total-protein').textContent = '0';
-    document.getElementById('total-carbs').textContent = '0';
-    document.getElementById('total-fats').textContent = '0';
-}
-
-// Rest of the functions (addFood, calculateTotalCalories, addToFoodLog, updateTotals, clearFields) remains the same.
-
-function addFood() {
-    const foodName = document.getElementById('food-name').value;
-    const calories = parseFloat(document.getElementById('calories').value);
-    const protein = parseFloat(document.getElementById('protein').value);
-    const carbs = parseFloat(document.getElementById('carbs').value);
-    const fats = parseFloat(document.getElementById('fats').value);
-
-    if (!foodName || isNaN(calories) || isNaN(protein) || isNaN(carbs) || isNaN(fats)) {
-        alert('Please fill in all fields with valid numbers.');
-        return;
+function setGoal() {
+    const newGoal = parseInt(document.getElementById('goal-calories').value);
+    if (!isNaN(newGoal)) {
+        goalCalories = newGoal;
+        localStorage.setItem('goalCalories', goalCalories);
+        alert(`Goal calories updated to ${goalCalories}`);
+    } else {
+        alert('Please enter a valid number for the goal calories.');
     }
-
-    const totalCalories = calculateTotalCalories(calories);
-    const foodItem = {
-        name: foodName,
-        calories: calories,
-        protein: protein,
-        carbs: carbs,
-        fats: fats,
-        totalCalories: totalCalories
-    };
-
-    addToFoodLog(foodItem);
-    updateTotals([foodItem]);
-    clearFields();
 }
 
-function calculateTotalCalories(calories) {
-    // Calculate total calories or apply any necessary formula
-    return calories;
+function addEntry() {
+    const calories = parseInt(document.getElementById('calories').value);
+    const protein = parseInt(document.getElementById('protein').value);
+    const carbs = parseInt(document.getElementById('carbs').value);
+    const fat = parseInt(document.getElementById('fat').value);
+
+    if (!isNaN(calories) && !isNaN(protein) && !isNaN(carbs) && !isNaN(fat)) {
+        const entry = { calories, protein, carbs, fat };
+        entries.push(entry);
+        updateEntries();
+        saveData();
+    } else {
+        alert('Please enter valid numbers for all fields.');
+    }
 }
 
-function addToFoodLog(foodItem) {
-    const foodLog = JSON.parse(localStorage.getItem('foodLog')) || [];
-    foodLog.push(foodItem);
-    localStorage.setItem('foodLog', JSON.stringify(foodLog));
+function updateEntries() {
+    const entriesDiv = document.getElementById('entries');
+    entriesDiv.innerHTML = '';
 
-    const foodLogUI = document.getElementById('food-log');
-    const li = document.createElement('li');
-    li.textContent = `${foodItem.name} | Calories: ${foodItem.totalCalories} | Protein: ${foodItem.protein}g | Carbs: ${foodItem.carbs}g | Fats: ${foodItem.fats}g`;
-    foodLogUI.appendChild(li);
-}
-
-function updateTotals(foodLog) {
-    let totalCalories = 0;
-    let totalProtein = 0;
-    let totalCarbs = 0;
-    let totalFats = 0;
-
-    foodLog.forEach(item => {
-        totalCalories += item.totalCalories;
-        totalProtein += item.protein;
-        totalCarbs += item.carbs;
-        totalFats += item.fats;
+    entries.forEach((entry, index) => {
+        const entryDiv = document.createElement('div');
+        entryDiv.classList.add('entry');
+        entryDiv.innerHTML = `
+            <p>Entry ${index + 1} - Calories: ${entry.calories}, Protein: ${entry.protein}g, Carbs: ${entry.carbs}g, Fat: ${entry.fat}g</p>
+        `;
+        entriesDiv.appendChild(entryDiv);
     });
-
-    document.getElementById('total-calories').textContent = totalCalories.toFixed(2);
-    document.getElementById('total-protein').textContent = totalProtein.toFixed(2);
-    document.getElementById('total-carbs').textContent = totalCarbs.toFixed(2);
-    document.getElementById('total-fats').textContent = totalFats.toFixed(2);
 }
 
-function clearFields() {
-    document.getElementById('food-name').value = '';
-    document.getElementById('calories').value = '';
-    document.getElementById('protein').value = '';
-    document.getElementById('carbs').value = '';
-    document.getElementById('fats').value = '';
+function resetData() {
+    entries = [];
+    updateEntries();
+    saveData();
 }
 
-// Previous code remains unchanged
-
-function setProfileName() {
-    const nameInput = document.getElementById('profile-name').value;
-    if (!nameInput) {
-        alert('Please enter a profile name.');
-        return;
-    }
-    profileName = nameInput;
-    document.getElementById('profile-display').textContent = profileName;
-    localStorage.setItem('profileName', profileName);
-    
-    document.getElementById('profile-section').style.display = 'none';
+function saveData() {
+    localStorage.setItem('entries', JSON.stringify(entries));
 }
-
-function setGoals() {
-    goalCalories = parseFloat(document.getElementById('goal-calories').value) || 0;
-    goalProtein = parseFloat(document.getElementById('goal-protein').value) || 0;
-    goalCarbs = parseFloat(document.getElementById('goal-carbs').value) || 0;
-    goalFats = parseFloat(document.getElementById('goal-fats').value) || 0;
-
-    document.getElementById('goal-display-calories').textContent = goalCalories;
-    document.getElementById('goal-display-protein').textContent = goalProtein;
-    document.getElementById('goal-display-carbs').textContent = goalCarbs;
-    document.getElementById('goal-display-fats').textContent = goalFats;
-
-    localStorage.setItem('goalCalories', goalCalories);
-    localStorage.setItem('goalProtein', goalProtein);
-    localStorage.setItem('goalCarbs', goalCarbs);
-    localStorage.setItem('goalFats', goalFats);
-
-    document.getElementById('goals-section').style.display = 'none';
-    document.getElementById('profile-summary').innerHTML += `<button onclick="changeGoals()">Change Goals</button>`;
-}
-
-function changeGoals() {
-    document.getElementById('goals-section').style.display = 'block';
-    const changeButton = document.querySelector('.profile-summary button');
-    if (changeButton) {
-        changeButton.remove();
-    }
-}
-
